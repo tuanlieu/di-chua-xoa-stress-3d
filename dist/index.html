@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="build" content="0ff047f64e" />
+  <meta name="theme-color" content="#1e241e" />
+  <title>Đi Chùa Xõa Stress 3D – Sansa UI × 12 Nhân Vật 3D Naruto &amp; One Piece</title>
+  <meta name="description" content="Đi chùa lễ Phật kết hợp xõa stress ngay trong chánh điện: Sàn DJ Chú Đại Bi Remix, Đấm Bốc Xả Nghiệp, Đại Mõ Phản Lực cùng 12 nhân vật 3D Naruto & One Piece." />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="stylesheet" href="./css/app.css" />
+  <script>window.__STATIC_HOST__ = true; window.__GAME_THEME__ = 'temple'; window.__SANSA_STRESS__ = true;</script>
+  <script src="./js/file-bundle.js"></script>
+</head>
+<body>
+  <canvas id="scene"></canvas>
+  <div id="joy" class="joy"><div class="knob"></div></div>
+
+  <!-- KHỞI ĐỘNG -->
+  <section id="boot" class="screen boot">
+    <div class="boot-card">
+      <div class="logo"><svg class="i"><use href="#i-wheel"/></svg></div>
+      <h1>Đi Chùa Xõa Stress 3D</h1>
+      <p>Sansa Temple UI/UX · Sàn DJ Ánh Trăng · Đấm Bốc Xả Nghiệp · 12 Nhân Vật 3D</p>
+      <div class="lotus-load"><svg viewBox="0 0 100 100"><g class="petals">
+      <path d="M50 18c9 10 13 21 13 31S58 70 50 76c-8-6-13-17-13-27s4-21 13-31z"/>
+      <path d="M50 76C38 76 22 68 16 50c13-1 24 4 32 13"/><path d="M50 76c12 0 28-8 34-26-13-1-24 4-32 13"/>
+      <path d="M50 76C42 70 28 58 30 38c9 3 15 10 19 20"/><path d="M50 76c8-6 22-18 20-38-9 3-15 10-19 20"/></g>
+      <path class="water" d="M14 84c12 4 24 6 36 6s24-2 36-6"/></svg></div>
+      <div class="bar boot-bar"><i id="bootBar"></i></div>
+      <small id="bootMsg">Đang dựng Chánh điện, Sàn DJ &amp; Võ đài 3D…</small>
+    </div>
+  </section>
+
+  <!-- MÀN CHÀO (người cũ) -->
+  <section id="welcome" class="screen boot hidden">
+    <div class="boot-card">
+      <div class="logo"><svg class="i"><use href="#i-wheel"/></svg></div>
+      <h1>Đi Chùa Xõa Stress 3D</h1>
+      <p id="welcomeText">A Di Đà Phật</p>
+      <button class="btn gold big" id="btnEnter"><svg class="i"><use href="#i-pray"/></svg> Vào Chùa &amp; Xõa Stress</button>
+      <small>Đeo tai nghe để trải nghiệm tiếng mõ thiền &amp; nhạc DJ Chú Đại Bi Remix</small>
+    </div>
+  </section>
+
+  <!-- TẠO NHÂN VẬT -->
+  <section id="setup" class="screen setup hidden">
+    <div class="setup-preview"><canvas id="previewCanvas"></canvas>
+      <div class="preview-badge" id="previewHeroBadge">🦸 Nhân vật 3D: <b>Luffy Gear 5</b> · Kéo ngang để xoay 360°</div>
+      <div class="steps"><i class="on"></i><i></i></div>
+    </div>
+    <div class="setup-card">
+      <!-- bước 1 -->
+      <div class="step" data-step="1">
+        <h2>Chọn máy chủ</h2>
+        <p class="muted">Đi Chùa Xõa Stress 3D – Sansa UI × 12 Nhân Vật 3D Naruto &amp; One Piece.</p>
+        <div class="server-list" id="serverList"></div>
+      </div>
+      <!-- bước 2 -->
+      <div class="step hidden" data-step="2">
+        <h2 id="setupTitle">Chọn Hoá Thân &amp; Trang Phục 3D</h2>
+        <div class="field">12 Nhân Vật Chibi 3D <small class="muted">(vẽ 3D toàn bộ theo ảnh tham khảo)</small>
+          <div class="hero-grid" id="fHeroGrid"></div>
+        </div>
+        <div class="field">Đồ Trang Phục 3D <small class="muted">(Pháp phục Sansa Hàn Quốc · Tay áo rộng · Lễ hội)</small>
+          <div class="outfit-grid" id="fOutfitGrid"></div>
+        </div>
+        <label class="field">Pháp danh / Tên hiển thị trong chùa
+          <span class="name-row"><input id="fName" maxlength="24" placeholder="Đang thỉnh tên…" autocomplete="off" /><button type="button" class="dice name-grant" id="btnDice" title="Thỉnh Phật ban tên khác"><svg class="i"><use href="#i-pray"/></svg> Đổi tên</button></span>
+        </label>
+        <details class="setup-more" id="fMore">
+          <summary>Tuỳ chỉnh thêm: Thiền phái, trang phục phụ &amp; màu da</summary>
+          <div class="field">Giới tính
+            <div class="chips" id="fGender">
+              <button data-v="nam" class="on">Nam</button><button data-v="nu">Nữ</button>
+            </div>
+          </div>
+          <div class="field">Kiểu tóc (khi không đội mũ/tóc tướng)
+            <div class="chips" id="fHair">
+              <button data-v="troc" class="on">Trọc</button><button data-v="ngan">Ngắn</button><button data-v="bui">Búi</button><button data-v="dai">Dài</button>
+            </div>
+          </div>
+          <div class="field">Màu da <div class="swatches" id="fSkin"></div></div>
+          <div class="field" id="fRobeWrap">Áo
+            <div class="chips" id="fRobe">
+              <button data-v="ao_lam" class="on">Áo tràng lam</button><button data-v="ao_xam">Áo chú tiểu xám</button>
+            </div>
+          </div>
+          <div class="field" id="fSectWrap">Thiền phái <small class="muted">(đổi sau mất 200 <svg class="i"><use href="#i-ngoc"/></svg>)</small>
+            <div class="sect-list" id="sectList"></div>
+          </div>
+        </details>
+        <label class="consent" id="consentWrap"><input type="checkbox" id="fConsent" checked> <span>Tôi đồng ý tham gia hành hương văn minh, hoan hỷ và xả stress tích cực cùng bạn bè.</span></label>
+        <button class="link" id="btnRestore">Đã có tài khoản? Đăng nhập</button>
+      </div>
+      <div class="setup-nav">
+        <button class="btn ghost" id="btnPrev">Quay lại</button>
+        <button class="btn gold" id="btnNext">Vào Chùa Ngay</button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- MÀN CHỜ VÀO CHÙA -->
+  <div id="fullScreen" class="full-screen hidden"><div class="full-card"><div class="full-lotus"><svg class="i"><use href="#i-sen"/></svg></div><h3>Chùa đã đủ người</h3><p id="fullMsg"></p><div id="fullFund" class="full-fund"></div><small id="fullCount"></small><button class="btn gold" id="fullRetry">Thử lại ngay</button></div></div>
+  <div id="idleWarn" class="idle-warn hidden"><b>Bạn còn ở đây không?</b><small id="idleCount"></small><button class="btn gold small" id="idleStay">Tôi vẫn ở đây</button></div>
+  <div id="idleScreen" class="full-screen hidden"><div class="full-card"><div class="full-lotus"><svg class="i"><use href="#i-sen"/></svg></div><h3>Đã tạm rời chùa</h3><p>Bạn đã lâu không thao tác nên hệ thống tạm ngắt kết nối để nhường chỗ cho Phật tử khác.</p><button class="btn gold" id="idleBack">Vào lại chùa</button></div></div>
+  <section id="loader" class="loader hidden">
+    <div class="loader-card">
+      <div class="lotus-load"><svg viewBox="0 0 100 100"><g class="petals">
+      <path d="M50 18c9 10 13 21 13 31S58 70 50 76c-8-6-13-17-13-27s4-21 13-31z"/>
+      <path d="M50 76C38 76 22 68 16 50c13-1 24 4 32 13"/><path d="M50 76c12 0 28-8 34-26-13-1-24 4-32 13"/>
+      <path d="M50 76C42 70 28 58 30 38c9 3 15 10 19 20"/><path d="M50 76c8-6 22-18 20-38-9 3-15 10-19 20"/></g>
+      <path class="water" d="M14 84c12 4 24 6 36 6s24-2 36-6"/></svg></div>
+      <h2 id="ldTitle">Đang về chùa…</h2>
+      <div class="bar"><i id="ldBar"></i></div>
+      <small id="ldStep">Thắp đèn chánh điện</small>
+      <p class="quote" id="ldQuote"></p>
+      <p class="ld-busy hidden" id="ldBusy">Lượng người lên chùa đang tăng đột biến nên máy chủ chưa đáp ứng kịp. Mong đạo hữu thông cảm, chịu khó chờ thêm chút nhé. Nam mô A Di Đà Phật 🙏</p>
+    </div>
+  </section>
+
+  <!-- HƯỚNG DẪN TỪNG BƯỚC -->
+  <div id="coach" class="coach hidden">
+    <div class="coach-hole" id="coachHole"></div>
+    <div class="coach-tip" id="coachTip"><b id="coachTitle"></b><p id="coachText"></p>
+      <div class="coach-nav"><button class="link" id="coachSkip">Bỏ qua</button><span id="coachDots"></span><button class="btn small gold" id="coachNext">Tiếp</button></div></div>
+  </div>
+
+  <!-- HUD -->
+  <div id="hud" class="hud hidden">
+    <button id="ticker" class="ticker hidden" aria-label="Thông báo"><span class="tk-ic">📢</span><span class="tk-win"><span class="tk-txt" id="tickerTxt"></span></span></button>
+    <div class="hud-top">
+      <button id="meChip" class="me-chip">
+        <span class="me-ava" id="meAva"></span>
+        <span class="me-info"><b id="meName">…</b><small id="meTitle"></small><i class="xp"><i id="meXp"></i></i></span>
+        <span class="me-lv" id="meLv">1</span>
+      </button>
+      <div class="zoom-btns"><button id="btnZoomIn" title="Phóng to" aria-label="Phóng to">+</button><button id="btnZoomOut" title="Thu nhỏ" aria-label="Thu nhỏ">−</button></div>
+      <div class="top-right"><button class="help-btn ui-toggle" id="btnUi" title="Thu gọn menu" aria-label="Thu gọn menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button><div class="wallet" id="wallet"><span><svg class="i"><use href="#i-sen"/></svg> <b id="wSen">0</b></span><span><svg class="i"><use href="#i-ngoc"/></svg> <b id="wNgoc">0</b></span></div><button class="help-btn hidden" id="btnFull" title="Toàn màn hình" aria-label="Toàn màn hình"></button><button class="help-btn mail-btn" id="btnQue" title="Gieo quẻ" aria-label="Gieo quẻ"><svg class="i"><use href="#i-story"/></svg><i class="mail-badge hidden" id="queBadge"></i></button><button class="help-btn mail-btn" id="btnWheel" title="Vòng quay lộc" aria-label="Vòng quay lộc"><svg class="i"><use href="#i-gift"/></svg><i class="mail-badge hidden" id="wheelBadge"></i></button><button class="help-btn mail-btn" id="btnMail" title="Hòm thư" aria-label="Hòm thư"><svg class="i"><use href="#i-mail"/></svg><i class="mail-badge hidden" id="mailBadge"></i></button><button class="help-btn donate-btn" id="btnDonate" title="Ủng hộ đội ngũ phát triển" aria-label="Ủng hộ"><svg class="i"><use href="#i-heart"/></svg></button><button class="help-btn" id="btnShare" title="Chia sẻ" aria-label="Chia sẻ"><svg class="i"><use href="#i-share"/></svg></button><button class="help-btn" id="btnHelp" title="Cách chơi" aria-label="Cách chơi">?</button></div>
+    </div>
+    <div class="hud-temple">
+      <button id="tName" class="tname">Chánh điện</button>
+      <button id="btnOut" class="out-btn hidden"></button>
+      <button id="btnChore" class="out-btn chore-btn hidden"><svg class="i"><use href="#i-spark"/></svg> Công quả</button>
+      <span id="tOnline" title="Người thật đang online"><i class="dot"></i> 1 đang online</span>
+      <button id="btnDjTrack" class="sansa-radio" title="Đài phát thanh Ánh Trăng (Sansa Radio) – Chạm để đổi nhạc DJ / Lo-Fi / Thiền">
+        <span class="sr-ic">🎵</span>
+        <span class="sr-marquee"><span id="djTrackLabel">Đài Ánh Trăng: Nhạc Thiền Chánh Điện · Chạm để bật DJ Remix</span></span>
+      </button>
+      <span id="sessPill" class="sess hidden"></span>
+      <span id="evBanner" class="ev hidden"></span>
+      <span id="buffBadge" class="buff hidden"></span>
+    </div>
+    <!-- THANH ĐO ÁP LỰC & COMBO XẢ STRESS (SANSA GAME DESIGN) -->
+    <div class="stress-widget" id="stressWidget">
+      <div class="sw-head">
+        <span id="stressStatus">🔥 Áp lực trần gian: <b id="stressPct">75%</b></span>
+        <span id="comboBadge" class="combo-badge hidden">⚡ COMBO x0</span>
+      </div>
+      <div class="sw-track"><i id="stressFill" style="width:75%"></i></div>
+    </div>
+    <div class="custom-bar" id="customBar">
+      <button data-zone="hall" class="cb-pill on" title="Về giữa Chánh điện lễ Phật">🏯 Trong Chánh Điện</button>
+      <button data-zone="dj" class="cb-pill cb-dj" title="Ra Sàn DJ ngoài sân chùa quẩy Chú Đại Bi Remix">🎧 Sàn DJ (Ngoài Sân)</button>
+      <button data-zone="boxing" class="cb-pill cb-box" title="Ra Võ Đài Đấm Bốc ngoài sân chùa xả giận vào 5 Bao Cát Nghiệp Chướng">🥊 Đấm Bốc (Ngoài Sân)</button>
+      <button data-zone="muyu" class="cb-pill cb-muyu" title="Ra Đại Mõ Phản Lực ngoài sân chùa gõ liên thanh tích Combo">🥁 Đại Mõ (Ngoài Sân)</button>
+      <button id="btnHeroSwitch" class="cb-pill cb-hero" title="Đổi ngay giữa 12 Nhân Vật 3D &amp; 8 Bộ Trang Phục Sansa Hàn Quốc">👘 Tướng &amp; Trang Phục 3D</button>
+      <button id="btnAmbience" class="cb-pill" title="Đổi không khí / thời gian trong chùa">☀️ Ban ngày</button>
+      <button id="btnRoomShare" class="cb-pill" title="Tạo phòng riêng &amp; gửi link rủ bạn bè vào cùng chùa">👥 Phòng bạn bè</button>
+    </div>
+    <nav class="side-menu">
+      <button data-sheet="quests" title="Nhiệm vụ"><span><svg class="i"><use href="#i-scroll"/></svg></span><i class="badge hidden" id="qBadge"></i><em>Nhiệm vụ</em></button>
+      <button data-sheet="bag" title="Túi đồ"><span><svg class="i"><use href="#i-bag"/></svg></span><em>Túi đồ</em></button>
+      <button data-sheet="shop" title="Cửa hàng"><span><svg class="i"><use href="#i-shop"/></svg></span><em>Cửa hàng</em></button>
+      <button data-sheet="community" title="Cộng đồng"><span><svg class="i"><use href="#i-users"/></svg></span><i class="badge hidden" id="cBadge"></i><em>Cộng đồng</em></button>
+      <button data-sheet="rank" title="Xếp hạng"><span><svg class="i"><use href="#i-trophy"/></svg></span><em>Xếp hạng</em></button>
+      <button data-sheet="map" title="Bản đồ chùa"><span><svg class="i"><use href="#i-map"/></svg></span><i class="badge dot hidden" id="mapDot"></i><em>Bản đồ chùa</em></button>
+      <button data-sheet="guide" title="Hướng dẫn tu tập"><span><svg class="i"><use href="#i-book"/></svg></span><em>Thiền phái</em></button>
+      <button data-sheet="support" title="Góp ý & ủng hộ"><span><svg class="i"><use href="#i-chat"/></svg></span><em>Góp ý</em></button>
+      <button id="btnServer" title="Đổi máy chủ"><span><svg class="i"><use href="#i-server"/></svg></span><em>Máy chủ</em></button>
+      <button id="btnFb" title="Cộng đồng Facebook"><span><svg class="i"><use href="#i-fb"/></svg></span><em>Facebook</em></button>
+      <button data-sheet="settings" title="Cài đặt"><span><svg class="i"><use href="#i-gear"/></svg></span><em>Cài đặt</em></button>
+    </nav>
+    <aside id="wishDock" class="wish-dock hidden" aria-label="Đèn nguyện">
+      <header><span class="wd-lamp"><svg class="i"><use href="#i-lantern"/></svg></span><div><b>Đèn nguyện</b><small id="wdCount"></small></div>
+        <button id="wdClose" class="wd-x" title="Tắt khung Đèn nguyện" aria-label="Tắt khung Đèn nguyện"><svg class="i"><use href="#i-close"/></svg></button></header>
+      <div class="wd-tabs"><button data-wd="temple" class="on">Chùa này</button><button data-wd="all">Tất cả chùa</button><button data-wd="act">Hoạt động</button></div>
+      <div id="wdList" class="wd-list"></div>
+      <button id="wdRelease" class="btn gold wd-release"><svg class="i"><use href="#i-lantern"/></svg> Thả đèn nguyện</button>
+    </aside>
+    <button id="wdOpen" class="wd-open hidden" title="Mở khung Đèn nguyện"><svg class="i"><use href="#i-lantern"/></svg> Đèn nguyện</button>
+    <p class="guide" id="guide">Kéo trái để đi · Vuốt phải để xoay · Chạm bồ đoàn để ngồi</p>
+
+    <div id="quyBar" class="quy-bar hidden"><b>Bạn đang là ngạ quỷ</b><small>Đứng yên nghe kinh để trở lại. Đi lại là ngừng tính.</small><div class="fund-track"><i id="quyFill"></i></div><small id="quyLeft"></small><button id="quyListen" class="btn small gold">Nghe kinh</button></div>
+    <div class="ctx-wrap"><button id="btnCtx" class="ctx hidden">Ngồi xuống</button></div>
+    <div class="actions">
+      <button id="btnBow" class="act"><span><svg class="i"><use href="#i-bow"/></svg></span><em id="bowLabel">Lạy Phật</em></button>
+      <button id="btnDjDance" class="act act-stress act-dj"><span>🎧</span><em id="djDanceLabel">Quẩy DJ</em></button>
+      <button id="btnPunch" class="act act-stress act-punch"><span>🥊</span><em>Đấm Xả Giận</em></button>
+      <button id="btnHyperMuyu" class="act act-stress act-muyu"><span>🥁</span><em>Gõ Mõ Combo</em></button>
+      <button id="btnBeads" class="act"><span><svg class="i"><use href="#i-beads"/></svg></span><em>Tràng hạt</em></button>
+      <button id="btnChant" class="act"><span><svg class="i"><use href="#i-drum"/></svg></span><em>Tụng kinh</em></button>
+      <button id="btnMeditate" class="act"><span><svg class="i"><use href="#i-meditate"/></svg></span><em>Thiền</em></button>
+      <button id="btnOffer" class="act"><span><svg class="i"><use href="#i-offer"/></svg></span><em>Dâng lễ</em></button>
+    </div>
+    <div id="offerMenu" class="pop hidden">
+      <button data-offer="huong_tram"><svg class="i"><use href="#i-incense"/></svg> Thắp hương <b data-qty="huong_tram"></b></button>
+      <button data-offer="nen_sap"><svg class="i"><use href="#i-candle"/></svg> Thắp nến <b data-qty="nen_sap"></b></button>
+      <button data-offer="hoa_dang"><svg class="i"><use href="#i-flower"/></svg> Dâng hoa <b data-qty="hoa_dang"></b></button>
+      <button data-offer="den_hoa_dang"><svg class="i"><use href="#i-lantern"/></svg> Thả đèn hoa đăng <b data-qty="den_hoa_dang"></b></button>
+      <button data-offer="bell"><svg class="i"><use href="#i-bell"/></svg> Thỉnh chuông</button>
+    </div>
+  </div>
+
+  <!-- TRÀNG HẠT -->
+  <section id="beadsView" class="beads hidden">
+    <canvas id="beadsCanvas"></canvas>
+    <button class="pill back" id="btnBeadsBack"><svg class="i"><use href="#i-back"/></svg> Quay lại</button>
+    <div class="bead-count">
+      <div><b id="beadNum">0</b> <span>/ 108</span></div>
+      <small id="beadRound">Vòng thứ nhất</small>
+    </div>
+    <p class="bead-hint">Chạm hoặc vuốt xuống để lần hạt<br /><span id="beadGain"></span></p>
+  </section>
+
+  <!-- TỤNG KINH, GÕ MÕ -->
+  <div id="bondBox" class="bond-box hidden"><div class="bond-info"><b id="bondName"></b> <span id="bondRank"></span></div><div class="bond-bar"><i id="bondFill"></i></div><button class="btn small gold" id="bondBtn">Kết duyên</button></div>
+  <section id="wheelView" class="wheel-view hidden">
+    <button class="pill back" id="btnWheelBack"><svg class="i"><use href="#i-back"/></svg> Quay lại</button>
+    <div class="wheel-box" id="wheelBox"></div>
+  </section>
+
+  <section id="chantView" class="chant hidden">
+    <button class="pill back" id="btnChantBack"><svg class="i"><use href="#i-back"/></svg> Quay lại</button>
+    <div class="chant-pick" id="chantPick"></div>
+    <p class="chant-note" id="chantNote"></p>
+    <div class="chant-lines" id="chantLines"></div>
+    <div class="chant-foot">
+      <div class="chant-count"><b id="chantNum">0</b><span id="chantOf"> / 0</span><small id="chantGain"></small></div>
+      <button class="mo" id="btnMo" aria-label="Gõ mõ"><svg viewBox="0 0 120 100" aria-hidden="true"><defs><radialGradient id="moG" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#c47a3a"/><stop offset=".6" stop-color="#8a4a1e"/><stop offset="1" stop-color="#4a2410"/></radialGradient></defs><ellipse cx="60" cy="58" rx="50" ry="36" fill="url(#moG)"/><path d="M18 62c14 12 70 12 84 0" fill="none" stroke="#2a1408" stroke-width="5" stroke-linecap="round"/><path d="M34 34c14-9 38-9 52 0" fill="none" stroke="#e0a868" stroke-width="2.5" stroke-linecap="round" opacity=".55"/><circle cx="60" cy="20" r="7" fill="#6a3616"/></svg></button>
+      <div class="chant-auto">
+        <label><input type="checkbox" id="chantVoice" checked> Giọng đọc (AI)</label>
+        <label><input type="checkbox" id="chantAuto"> Mõ tự động</label>
+        <label class="chant-tempo">Nhịp <input type="range" id="chantTempo" min="40" max="110" value="66"></label>
+        <small>Tự tay gõ mới có công đức từng tiếng</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- THIỀN -->
+  <section id="medView" class="meditate hidden">
+    <div class="med-pick" id="medPick">
+      <h2>Thiền định</h2>
+      <p>Ngồi thẳng lưng, thả lỏng vai, theo dõi hơi thở.</p>
+      <div class="chips big" id="medDur">
+        <button data-m="5" class="on">5 phút</button><button data-m="10">10 phút</button><button data-m="20">20 phút</button><button data-m="30">30 phút</button><button data-m="0">Tự do</button>
+      </div>
+      <div class="row"><button class="btn ghost" id="medCancel">Để sau</button><button class="btn gold" id="medStart">Bắt đầu</button></div>
+    </div>
+    <div class="med-run hidden" id="medRun">
+      <div class="breath"><i></i><span id="breathText">Hít vào…</span></div>
+      <div class="med-time" id="medTime">00:00</div>
+      <p class="muted" id="medInfo"></p>
+      <button class="btn ghost" id="medStop">Xả thiền</button>
+    </div>
+  </section>
+
+  <!-- BOTTOM SHEET -->
+  <div id="sheet" class="sheet hidden">
+    <div class="sheet-card">
+      <div class="sheet-head"><h3 id="sheetTitle"></h3><button class="x" id="sheetClose"><svg class="i"><use href="#i-close"/></svg></button></div>
+      <div class="tabs" id="sheetTabs"></div>
+      <div class="sheet-body" id="sheetBody"></div>
+    </div>
+  </div>
+
+  <!-- MODAL -->
+  <div id="modal" class="modal hidden"><div class="modal-card" id="modalCard"></div></div>
+
+  <div id="lanternLayer" class="lantern-layer"></div>
+  <div id="floaters" class="floaters"></div>
+  <div id="toast" class="toast"></div>
+</body>
+</html>

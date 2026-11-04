@@ -1,0 +1,30 @@
+{
+  "id": "/",
+  "name": "Niệm Phật Online",
+  "short_name": "Niệm Phật",
+  "description": "Chùa 3D trực tuyến – lạy Phật, niệm Phật, lần tràng hạt, thiền định cùng mọi người.",
+  "lang": "vi",
+  "dir": "ltr",
+  "start_url": "/?src=pwa",
+  "scope": "/",
+  "display": "fullscreen",
+  "display_override": ["fullscreen", "standalone"],
+  "orientation": "any",
+  "background_color": "#1a110b",
+  "theme_color": "#1a110b",
+  "categories": ["lifestyle", "education", "games"],
+  "icons": [
+    { "src": "/img/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/img/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/img/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "screenshots": [
+    { "src": "/img/shot-1.jpg", "sizes": "800x1640", "type": "image/jpeg", "form_factor": "narrow", "label": "Chánh điện 3D" },
+    { "src": "/img/shot-2.jpg", "sizes": "800x1640", "type": "image/jpeg", "form_factor": "narrow", "label": "Bản đồ hành hương" },
+    { "src": "/img/shot-wide.jpg", "sizes": "1688x780", "type": "image/jpeg", "form_factor": "wide", "label": "Chơi xoay ngang" }
+  ],
+  "shortcuts": [
+    { "name": "Vào chùa", "url": "/?src=pwa", "icons": [{ "src": "/img/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Bảng xếp hạng", "url": "/?open=rank", "icons": [{ "src": "/img/icon-192.png", "sizes": "192x192" }] }
+  ]
+}
