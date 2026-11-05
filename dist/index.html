@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="./css/app.css" />
   <script>window.__STATIC_HOST__ = true; window.__GAME_THEME__ = 'temple'; window.__SANSA_STRESS__ = true;</script>
   <script src="./js/file-bundle.js"></script>
+  <link rel="stylesheet" href="./css/compact-menu.css" />
+  <script defer src="./js/compact-menu.js"></script>
 </head>
 <body>
   <canvas id="scene"></canvas>
@@ -162,7 +164,7 @@
       </div>
       <div class="sw-track"><i id="stressFill" style="width:75%"></i></div>
     </div>
-    <div class="custom-bar" id="customBar">
+    <details class="compact-menu compact-temple"><summary aria-controls="customBar">🏯 Trong Chánh Điện <span aria-hidden="true">▾</span></summary><div class="custom-bar" id="customBar">
       <button data-zone="hall" class="cb-pill on" title="Về giữa Chánh điện lễ Phật">🏯 Trong Chánh Điện</button>
       <button data-zone="dj" class="cb-pill cb-dj" title="Ra Sàn DJ ngoài sân chùa quẩy Chú Đại Bi Remix">🎧 Sàn DJ (Ngoài Sân)</button>
       <button data-zone="boxing" class="cb-pill cb-box" title="Ra Võ Đài Đấm Bốc ngoài sân chùa xả giận vào 5 Bao Cát Nghiệp Chướng">🥊 Đấm Bốc (Ngoài Sân)</button>
@@ -170,8 +172,8 @@
       <button id="btnHeroSwitch" class="cb-pill cb-hero" title="Đổi ngay giữa 12 Nhân Vật 3D &amp; 8 Bộ Trang Phục Sansa Hàn Quốc">👘 Tướng &amp; Trang Phục 3D</button>
       <button id="btnAmbience" class="cb-pill" title="Đổi không khí / thời gian trong chùa">☀️ Ban ngày</button>
       <button id="btnRoomShare" class="cb-pill" title="Tạo phòng riêng &amp; gửi link rủ bạn bè vào cùng chùa">👥 Phòng bạn bè</button>
-    </div>
-    <nav class="side-menu">
+    </div></details>
+    <details class="compact-menu compact-side"><summary aria-controls="compactSide">☰ Menu <span aria-hidden="true">▾</span></summary><nav class="side-menu" id="compactSide" aria-label="Menu game">
       <button data-sheet="quests" title="Nhiệm vụ"><span><svg class="i"><use href="#i-scroll"/></svg></span><i class="badge hidden" id="qBadge"></i><em>Nhiệm vụ</em></button>
       <button data-sheet="bag" title="Túi đồ"><span><svg class="i"><use href="#i-bag"/></svg></span><em>Túi đồ</em></button>
       <button data-sheet="shop" title="Cửa hàng"><span><svg class="i"><use href="#i-shop"/></svg></span><em>Cửa hàng</em></button>
@@ -183,7 +185,7 @@
       <button id="btnServer" title="Đổi máy chủ"><span><svg class="i"><use href="#i-server"/></svg></span><em>Máy chủ</em></button>
       <button id="btnFb" title="Cộng đồng Facebook"><span><svg class="i"><use href="#i-fb"/></svg></span><em>Facebook</em></button>
       <button data-sheet="settings" title="Cài đặt"><span><svg class="i"><use href="#i-gear"/></svg></span><em>Cài đặt</em></button>
-    </nav>
+    </nav></details>
     <aside id="wishDock" class="wish-dock hidden" aria-label="Đèn nguyện">
       <header><span class="wd-lamp"><svg class="i"><use href="#i-lantern"/></svg></span><div><b>Đèn nguyện</b><small id="wdCount"></small></div>
         <button id="wdClose" class="wd-x" title="Tắt khung Đèn nguyện" aria-label="Tắt khung Đèn nguyện"><svg class="i"><use href="#i-close"/></svg></button></header>
@@ -196,7 +198,7 @@
 
     <div id="quyBar" class="quy-bar hidden"><b>Bạn đang là ngạ quỷ</b><small>Đứng yên nghe kinh để trở lại. Đi lại là ngừng tính.</small><div class="fund-track"><i id="quyFill"></i></div><small id="quyLeft"></small><button id="quyListen" class="btn small gold">Nghe kinh</button></div>
     <div class="ctx-wrap"><button id="btnCtx" class="ctx hidden">Ngồi xuống</button></div>
-    <div class="actions">
+    <details class="compact-menu compact-actions"><summary aria-controls="compactActions">✦ Thao tác <span aria-hidden="true">▾</span></summary><div class="actions" id="compactActions">
       <button id="btnBow" class="act"><span><svg class="i"><use href="#i-bow"/></svg></span><em id="bowLabel">Lạy Phật</em></button>
       <button id="btnDjDance" class="act act-stress act-dj"><span>🎧</span><em id="djDanceLabel">Quẩy DJ</em></button>
       <button id="btnPunch" class="act act-stress act-punch"><span>🥊</span><em>Đấm Xả Giận</em></button>
@@ -205,7 +207,7 @@
       <button id="btnChant" class="act"><span><svg class="i"><use href="#i-drum"/></svg></span><em>Tụng kinh</em></button>
       <button id="btnMeditate" class="act"><span><svg class="i"><use href="#i-meditate"/></svg></span><em>Thiền</em></button>
       <button id="btnOffer" class="act"><span><svg class="i"><use href="#i-offer"/></svg></span><em>Dâng lễ</em></button>
-    </div>
+    </div></details>
     <div id="offerMenu" class="pop hidden">
       <button data-offer="huong_tram"><svg class="i"><use href="#i-incense"/></svg> Thắp hương <b data-qty="huong_tram"></b></button>
       <button data-offer="nen_sap"><svg class="i"><use href="#i-candle"/></svg> Thắp nến <b data-qty="nen_sap"></b></button>
